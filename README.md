@@ -27,7 +27,7 @@ TumorScan.ai/ ├── app.py # Flask web application for real-time tumor detec
 Install the required packages using pip:
 
 ```bash
-pip install tensorflow keras numpy opencv-python pillow scikit-learn matplotlib flask werkzeug
+pip install tensorflow keras numpy opencv-python pillow scikit-learn matplotlib flask werkzeug```
 
 
 ## Usage
@@ -39,10 +39,10 @@ datasets/yes/ – images with a tumor
 ### 2. Train the Model
 Run the training script to build and save your model:
 
-bash
+```bash
 Copy
 Edit
-python mainTrain.py
+python mainTrain.py```
 This script will:
 
 Load and preprocess images (resize to 64x64 pixels, normalize, and one-hot encode labels).
@@ -51,10 +51,10 @@ Save the trained model as BrainTumor10EpochsCategorical.h5.
 ### 3. Evaluate the Model
 Use the evaluation script to generate performance metrics and an ROC curve:
 
-bash
+```bash
 Copy
 Edit
-python results.py
+python results.py```
 This script will:
 
 Retrain the model (if needed) and predict on the test set.
@@ -63,11 +63,11 @@ Save the evaluated model as BrainTumorModel.h5.
 ### 4. Test the Model on a Single Image
 To test the model on a specific image, run:
 
-bash
+```bash
 Copy
 Edit
 python mainTest.py
-Make sure to update the image path in the script if needed.
+Make sure to update the image path in the script if needed.```
 
 ### 5. Run the Web Application
 Launch the Flask web application with:
