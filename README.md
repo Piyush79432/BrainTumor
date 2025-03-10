@@ -30,13 +30,13 @@ Install the required packages using pip:
 pip install tensorflow keras numpy opencv-python pillow scikit-learn matplotlib flask werkzeug
 
 
-Usage
-1. Prepare Your Dataset
+## Usage
+### 1. Prepare Your Dataset
 Place your brain scan images into the datasets/ folder with the following structure:
 
 datasets/no/ – images with no tumor
 datasets/yes/ – images with a tumor
-2. Train the Model
+### 2. Train the Model
 Run the training script to build and save your model:
 
 bash
@@ -48,7 +48,7 @@ This script will:
 Load and preprocess images (resize to 64x64 pixels, normalize, and one-hot encode labels).
 Train a CNN model for 10 epochs.
 Save the trained model as BrainTumor10EpochsCategorical.h5.
-3. Evaluate the Model
+### 3. Evaluate the Model
 Use the evaluation script to generate performance metrics and an ROC curve:
 
 bash
@@ -60,7 +60,7 @@ This script will:
 Retrain the model (if needed) and predict on the test set.
 Plot and display the ROC curve.
 Save the evaluated model as BrainTumorModel.h5.
-4. Test the Model on a Single Image
+### 4. Test the Model on a Single Image
 To test the model on a specific image, run:
 
 bash
@@ -69,7 +69,7 @@ Edit
 python mainTest.py
 Make sure to update the image path in the script if needed.
 
-5. Run the Web Application
+### 5. Run the Web Application
 Launch the Flask web application with:
 
 bash
@@ -78,7 +78,7 @@ Edit
 python app.py
 Then, open your browser and go to http://127.0.0.1:5000/ to use the upload interface for real-time predictions.
 
-Model Details
+## Model Details
 The CNN model architecture includes:
 
 Multiple convolutional layers with ReLU activation and max pooling.
@@ -88,6 +88,6 @@ Contributing
 Contributions are welcome! Please fork the repository and submit a pull request with your improvements or bug fixes. For major changes, please open an issue first to discuss what you would like to change.
 
 
-Acknowledgements
+## Acknowledgements
 Built with TensorFlow, Keras, and Flask.
 Thanks to the open-source community for the development tools and libraries that made this project possible.
