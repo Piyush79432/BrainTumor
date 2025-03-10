@@ -26,37 +26,22 @@ TumorScan.ai/ ├── app.py # Flask web application for real-time tumor detec
 
 Install the required packages using pip:
 
-```bash
-pip install tensorflow keras numpy opencv-python pillow scikit-learn matplotlib flask werkzeug```
+# TumorScan.ai
 
+TumorScan.ai is a Python application for brain tumor detection using deep learning. This project leverages a Convolutional Neural Network (CNN) built with TensorFlow and Keras, and provides a Flask-based web interface that allows users to upload brain scan images and receive immediate diagnostic predictions.
 
 ## Usage
-### 1. Prepare Your Dataset
-Place your brain scan images into the datasets/ folder with the following structure:
 
-datasets/no/ – images with no tumor
-datasets/yes/ – images with a tumor
+### 1. Prepare Your Dataset
+Place your brain scan images into the `datasets/` folder with the following structure:
+- `datasets/no/` – images with no tumor
+- `datasets/yes/` – images with a tumor
+
 ### 2. Train the Model
 Run the training script to build and save your model:
 
 ```bash
-Copy
-Edit
-python mainTrain.py```
-This script will:
-
-Load and preprocess images (resize to 64x64 pixels, normalize, and one-hot encode labels).
-Train a CNN model for 10 epochs.
-Save the trained model as BrainTumor10EpochsCategorical.h5.
-### 3. Evaluate the Model
-Use the evaluation script to generate performance metrics and an ROC curve:
-
-```bash
-Copy
-Edit
-python results.py```
-This script will:
-
+python mainTrain.py
 Retrain the model (if needed) and predict on the test set.
 Plot and display the ROC curve.
 Save the evaluated model as BrainTumorModel.h5.
