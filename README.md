@@ -37,42 +37,8 @@ Place your brain scan images into the `datasets/` folder with the following stru
 - `datasets/no/` – images with no tumor
 - `datasets/yes/` – images with a tumor
 
-### 2. Train the Model
+### 2. Run using Flsk
 Run the training script to build and save your model:
-
 ```bash
-python mainTrain.py
-Retrain the model (if needed) and predict on the test set.
-Plot and display the ROC curve.
-Save the evaluated model as BrainTumorModel.h5.
-### 4. Test the Model on a Single Image
-To test the model on a specific image, run:
-
-```bash
-Copy
-Edit
-python mainTest.py
-Make sure to update the image path in the script if needed.```
-
-### 5. Run the Web Application
-Launch the Flask web application with:
-
-bash
-Copy
-Edit
 python app.py
-Then, open your browser and go to http://127.0.0.1:5000/ to use the upload interface for real-time predictions.
 
-## Model Details
-The CNN model architecture includes:
-
-Multiple convolutional layers with ReLU activation and max pooling.
-A dense (fully connected) layer with dropout for regularization.
-A final dense layer with softmax activation for binary classification (tumor vs. no tumor).
-Contributing
-Contributions are welcome! Please fork the repository and submit a pull request with your improvements or bug fixes. For major changes, please open an issue first to discuss what you would like to change.
-
-
-## Acknowledgements
-Built with TensorFlow, Keras, and Flask.
-Thanks to the open-source community for the development tools and libraries that made this project possible.
