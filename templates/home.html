@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TumorScan.ai - Advanced Brain Tumor Detection</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}" type="image/x-icon">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                            950: '#052e16',
+                        },
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                },
+            },
+        }
+    </script>
+ 
+</head>
+<body class="font-sans bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
+    <!-- Header -->
+    <header id="header" class="fixed w-full bg-white dark:bg-gray-800 shadow-md z-50 transition-colors duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="{{ url_for('home') }}" class="flex items-center space-x-2 text-xl font-bold text-gray-800 dark:text-white">
+                <i class="fas fa-brain text-primary-600 text-2xl"></i>
+                <span>TumorScan.ai</span>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-500 font-medium transition-colors duration-300">Home</a>
+                <a href="#about" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-500 font-medium transition-colors duration-300">About</a>
+                <a href="#steps" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-500 font-medium transition-colors duration-300">How It Works</a>
+                <a href="#contact" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-500 font-medium transition-colors duration-300">Contact</a>
+                <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block text-yellow-300"></i>
+                </button>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden flex items-center">
+                <button id="theme-toggle-mobile" class="p-2 mr-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block text-yellow-300"></i>
+                </button>
+                <button id="mobile-menu-button" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-500">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 shadow-lg transition-all duration-300">
+            <div class="container mx-auto px-4 py-3 flex flex-col space-y-4">
+                <a href="#home" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-500 font-medium py-2 transition-colors duration-300">Home</a>
+                <a href="#about" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-500 font-medium py-2 transition-colors duration-300">About</a>
+                <a href="#steps" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-500 font-medium py-2 transition-colors duration-300">How It Works</a>
+                <a href="#contact" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-500 font-medium py-2 transition-colors duration-300">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="pt-24 md:pt-32 pb-16 md:pb-24 bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-800">
+            <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="order-2 md:order-1">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-900 dark:text-white mb-6">
+                        Early Detection for <span class="text-primary-600 dark:text-primary-500">Better Outcomes</span>
+                    </h1>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 mb-8 max-w-lg">
+                        Our AI-powered brain tumor detection system provides accurate analysis of MRI scans in seconds, helping medical professionals make faster and more informed decisions.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="{{ url_for('analysis') }}" class="inline-flex items-center justify-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                            Start Diagnosis
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="#steps" class="inline-flex items-center justify-center px-6 py-3 bg-white dark:bg-gray-700 text-gray-800 dark:text-white font-medium rounded-lg border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-all duration-300 shadow-md hover:shadow-lg">
+                            Learn More
+                            <i class="fas fa-info-circle ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-primary-200 dark:bg-primary-900/30 rounded-full blur-3xl opacity-30 animate-pulse-slow"></div>
+                        <img src="{{ url_for('static', filename='img/brain-scan.jpg') }}" onerror="this.onerror=null; this.src='https://media.istockphoto.com/id/532975962/photo/the-brain.jpg?s=612x612&w=0&k=20&c=Qm2ZJop_qRwQOedcxZ8U-wtGEJ2MYRZjlHT6WlSZCBU=';" alt="Brain Scan" class="relative z-10 w-full max-w-md rounded-2xl shadow-xl transform transition-transform duration-500 hover:scale-105 brain-animate">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Section -->
+            <div class="container mx-auto px-4 mt-16">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Accuracy Rate</h3>
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center">
+                                <i class="fas fa-bullseye text-primary-600 dark:text-primary-400 text-xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-3xl font-bold text-primary-600 dark:text-primary-500">95%+</p>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">Our model achieves high accuracy in tumor detection</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Processing Time</h3>
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center">
+                                <i class="fas fa-clock text-primary-600 dark:text-primary-400 text-xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-3xl font-bold text-primary-600 dark:text-primary-500">&lt; 5 sec</p>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">Fast analysis for immediate results</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transform transition-all duration-300 hover:scale-105">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Trained On</h3>
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center">
+                                <i class="fas fa-database text-primary-600 dark:text-primary-400 text-xl"></i>
+                            </div>
+                        </div>
+                        <p class="text-3xl font-bold text-primary-600 dark:text-primary-500">1000+</p>
+                        <p class="text-gray-600 dark:text-gray-400 mt-2">MRI scans used to train our AI model</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 bg-gray-100 dark:bg-gray-800 transition-colors duration-300">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-4">
+                    About Our <span class="text-primary-600 dark:text-primary-500">Technology</span>
+                </h2>
+                <p class="text-center text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12">
+                    Our deep learning model has been trained on thousands of MRI scans to accurately detect and classify brain tumors.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 transition-transform duration-300 hover:transform hover:scale-105">
+                        <div class="w-14 h-14 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-brain text-primary-600 dark:text-primary-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Advanced AI Analysis</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Our system uses a convolutional neural network (CNN) trained on thousands of medical images to detect brain tumors with high accuracy.
+                        </p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 transition-transform duration-300 hover:transform hover:scale-105">
+                        <div class="w-14 h-14 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-chart-line text-primary-600 dark:text-primary-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Precise Detection</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Our technology can identify the presence of brain tumors with over 95% accuracy, helping to reduce false positives and negatives.
+                        </p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-6 transition-transform duration-300 hover:transform hover:scale-105">
+                        <div class="w-14 h-14 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-user-md text-primary-600 dark:text-primary-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-3">Expert Support</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Our platform connects you with healthcare professionals who can help interpret results and guide you through next steps.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Technical Details -->
+                <div class="mt-16">
+                    <h3 class="text-2xl font-semibold text-center text-gray-900 dark:text-white mb-8">
+                        Technical <span class="text-primary-600 dark:text-primary-500">Specifications</span>
+                    </h3>
+                    <div class="bg-white dark:bg-gray-700 rounded-xl shadow-lg overflow-hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2">
+                            <div class="p-6 md:p-8">
+                                <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Model Architecture</h4>
+                                <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>Convolutional Neural Network (CNN)</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>Multiple convolutional layers with ReLU activation</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>MaxPooling layers for feature extraction</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>Dropout layers to prevent overfitting</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>Softmax activation for binary classification</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="p-6 md:p-8 bg-gray-50 dark:bg-gray-800">
+                                <h4 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Performance Metrics</h4>
+                                <ul class="space-y-3 text-gray-700 dark:text-gray-300">
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>High accuracy on validation data</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>Low false positive rate</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>High ROC-AUC score</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>Optimized for both sensitivity and specificity</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fas fa-check-circle text-primary-600 dark:text-primary-400 mt-1 mr-2"></i>
+                                        <span>Continuous model improvement through retraining</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Steps Section -->
+        <section id="steps" class="py-16 bg-white dark:bg-gray-900 transition-colors duration-300">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                    How It <span class="text-primary-600 dark:text-primary-500">Works</span>
+                </h2>
+                
+                <!-- Timeline Steps -->
+                <div class="relative">
+                    <!-- Vertical Line -->
+                    <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary-200 dark:bg-primary-900/30"></div>
+                    
+                    <!-- Step 1 -->
+                    <div class="relative z-10 mb-12 md:mb-0">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="flex-1 md:text-right md:pr-8 mb-4 md:mb-0">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Upload Your MRI Scan</h3>
+                                <p class="text-gray-700 dark:text-gray-300 max-w-md ml-auto">
+                                    Begin by uploading your recent brain MRI scan. Our system accepts multiple formats including JPEG and PNG for your convenience.
+                                </p>
+                            </div>
+                            <div class="md:mx-4 w-16 h-16 bg-primary-600 dark:bg-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl z-10 shadow-lg">01</div>
+                            <div class="flex-1 md:pl-8 hidden md:block"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="relative z-10 mb-12 md:mb-0 md:mt-24">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="flex-1 md:text-right md:pr-8 mb-4 md:mb-0 md:hidden">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">AI Analysis</h3>
+                                <p class="text-gray-700 dark:text-gray-300 max-w-md ml-auto">
+                                    Our AI-powered system will process the scan and provide a detailed report on the presence of brain tumors with high accuracy.
+                                </p>
+                            </div>
+                            <div class="md:mx-4 w-16 h-16 bg-primary-600 dark:bg-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl z-10 shadow-lg">02</div>
+                            <div class="flex-1 md:pl-8 hidden md:block">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">AI Analysis</h3>
+                                <p class="text-gray-700 dark:text-gray-300 max-w-md">
+                                    Our AI-powered system will process the scan and provide a detailed report on the presence of brain tumors with high accuracy.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="relative z-10 md:mt-24">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="flex-1 md:text-right md:pr-8 mb-4 md:mb-0">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Get Results Instantly</h3>
+                                <p class="text-gray-700 dark:text-gray-300 max-w-md ml-auto">
+                                    Review the results immediately and download a detailed report. Our system provides clear insights into the analysis.
+                                </p>
+                            </div>
+                            <div class="md:mx-4 w-16 h-16 bg-primary-600 dark:bg-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl z-10 shadow-lg">03</div>
+                            <div class="flex-1 md:pl-8 hidden md:block"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 4 -->
+                    <div class="relative z-10 md:mt-24">
+                        <div class="flex flex-col md:flex-row items-center">
+                            <div class="flex-1 md:text-right md:pr-8 mb-4 md:mb-0 md:hidden">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Expert Consultation</h3>
+                                <p class="text-gray-700 dark:text-gray-300 max-w-md ml-auto">
+                                    Connect with specialists to discuss the results and explore personalized treatment options for your specific case.
+                                </p>
+                            </div>
+                            <div class="md:mx-4 w-16 h-16 bg-primary-600 dark:bg-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl z-10 shadow-lg">04</div>
+                            <div class="flex-1 md:pl-8 hidden md:block">
+                                <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Expert Consultation</h3>
+                                <p class="text-gray-700 dark:text-gray-300 max-w-md">
+                                    Connect with specialists to discuss the results and explore personalized treatment options for your specific case.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-16">
+                    <a href="{{ url_for('analysis') }}" class="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors duration-300 transform hover:scale-105 shadow-lg">
+                        Start Now
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 bg-gray-100 dark:bg-gray-800 transition-colors duration-300">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">
+                    Get in <span class="text-primary-600 dark:text-primary-500">Touch</span>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-6">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt text-primary-600 dark:text-primary-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900 dark:text-white">Address</h4>
+                                    <p class="text-gray-700 dark:text-gray-300">1234 Medical Center Dr, Healthcare City, HC 43210</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-phone text-primary-600 dark:text-primary-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900 dark:text-white">Phone</h4>
+                                    <p class="text-gray-700 dark:text-gray-300">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900/50 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-envelope text-primary-600 dark:text-primary-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium text-gray-900 dark:text-white">Email</h4>
+                                    <p class="text-gray-700 dark:text-gray-300">info@tumorscan.ai</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="font-medium text-gray-900 dark:text-white mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-full flex items-center justify-center transition-colors duration-300">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-full flex items-center justify-center transition-colors duration-300">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-full flex items-center justify-center transition-colors duration-300">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-primary-600 hover:bg-primary-700 text-white rounded-full flex items-center justify-center transition-colors duration-300">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <form class="bg-white dark:bg-gray-700 rounded-xl shadow-lg p-8">
+                            <div class="mb-6">
+                                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Full Name</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:text-white" placeholder="John Doe">
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email Address</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:text-white" placeholder="john@example.com">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Message</label>
+                                <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-gray-50 dark:bg-gray-600 border border-gray-300 dark:border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:text-white" placeholder="How can we help you?"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors duration-300">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <a href="#" class="flex items-center space-x-2 text-xl font-bold mb-4">
+                        <i class="fas fa-brain text-primary-500 text-2xl"></i>
+                        <span>TumorScan.ai</span>
+                    </a>
+                    <p class="text-gray-400 mb-4">
+                        Advanced brain tumor detection powered by artificial intelligence and deep learning.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">About</a></li>
+                        <li><a href="#steps" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">How It Works</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">Research</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">FAQ</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary-500 transition-colors duration-300">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Subscribe</h3>
+                    <p class="text-gray-400 mb-4">Stay updated with our latest news and updates.</p>
+                    <form>
+                        <div class="flex">
+                            <input type="email" placeholder="Your email" class="px-4 py-2 w-full bg-gray-800 border border-gray-700 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-primary-500">
+                            <button type="submit" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 rounded-r-lg transition-colors duration-300">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 TumorScan.ai. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-primary-600 text-white rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110 opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+            localStorage.setItem('dark-mode', document.documentElement.classList.contains('dark'));
+        }
+        
+        themeToggle.addEventListener('click', toggleDarkMode);
+        themeToggleMobile.addEventListener('click', toggleDarkMode);
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('dark-mode') === 'true' || 
+            (localStorage.getItem('dark-mode') === null && 
+             window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 50) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>
