@@ -32,30 +32,30 @@ TumorScan.ai is a web-based application that uses deep learning to detect brain 
 
 ### Steps
 
-1. Clone the repository:
-```bash
-git clone https://github.com/Piyush79432/BrainTumor.git
-cd tumorscan.ai
-```
-2. Install Dependencies:
-```bash
-pip install -r requirements.txt
-```
+  1. Clone the repository:
+  ```bash
+  git clone https://github.com/Piyush79432/BrainTumor.git
+  cd tumorscan.ai
+  ```
+  2. Install Dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
 3. Download the pre-trained model file BrainTumor10Epochs.h5 and place it in the project root directory
 
 ### Usage
-1.Run the Flask application:
-```bash
-python app.py
-```
-2.Open your web browser and navigate to:
-```bash
-http://localhost:5000
-```
-3.Follow the on-screen instructions to upload an MRI image
-4.View the detection results:
-   a.  "No Brain Tumor" - Negative result
-   b. "Warning! Tumor detected..." - Positive result
+  1.Run the Flask application:
+  ```bash
+  python app.py
+  ```
+  2.Open your web browser and navigate to:
+  ```bash
+  http://localhost:5000
+  ```
+  3. Follow the on-screen instructions to upload an MRI image
+  4.View the detection results:
+     a.  "No Brain Tumor" - Negative result
+     b. "Warning! Tumor detected..." - Positive result
 
 ### Project Structure
 tumorscan.ai/
@@ -69,17 +69,18 @@ tumorscan.ai/
 └── static/                # Static files (CSS, JS, images)
 
 ###  Requirements
-Create a requirements.txt file with the following content:
-```bash
-Flask==2.0.3
-tensorflow==2.15.0
-numpy==1.21.6
-Pillow==9.0.1
-opencv-python==4.5.5.64
-Werkzeug==2.0.3
-```
-Save this as requirements.txt in your project root.
+  Create a requirements.txt file with the following content:
+  ```bash
+  Flask==2.0.3
+  tensorflow==2.15.0
+  numpy==1.21.6
+  Pillow==9.0.1
+  opencv-python==4.5.5.64
+  Werkzeug==2.0.3
+  ```
+  Save this as requirements.txt in your project root.
 
 ### Disclaimer
-This application is intended for research and educational purposes only. It should not be used as a substitute for professional medical diagnosis. Always consult a qualified healthcare provider for medical concerns.
+  This application is intended for research and educational purposes only. It should not be used as a substitute for professional medical diagnosis. Always consult a qualified healthcare provider for medical 
+  concerns.
 
